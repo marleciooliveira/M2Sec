@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M3sec — Remoção de dados pessoais em buscadores e bases jurídicas</title>
+<meta name="description" content="Diagnóstico honesto da sua exposição digital. Classificamos cada resultado, dizemos o que sai, o que talvez saia e o que não sai — e não cobramos pelo que não sai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101618;
+  --ink-2:#182124;
+  --ink-3:#222E31;
+  --paper:#EDF0EF;
+  --paper-2:#FBFCFB;
+  --brand:#1E6B64;
+  --brand-lt:#4FA79C;
+  --verde:#2E7D5B;
+  --ambar:#B0781C;
+  --tijolo:#A63A2E;
+  --mist:#8A9997;
+  --rule:rgba(237,240,239,.12);
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Spectral,Georgia,serif;font-weight:500;letter-spacing:-.015em;line-height:1.12;margin:0}
+p{margin:0 0 1em}
+a{color:var(--brand-lt)}
+:focus-visible{outline:2px solid var(--brand-lt);outline-offset:3px;border-radius:2px}
+
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mist);margin:0 0 18px;
+}
+
+/* ---------- topo ---------- */
+.topbar{border-bottom:1px solid var(--rule)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:Spectral,serif;font-size:22px;letter-spacing:-.02em}
+.logo b{color:var(--brand-lt);font-weight:600}
+.topbar nav{display:flex;gap:26px;font-size:14px}
+.topbar nav a{color:var(--mist);text-decoration:none}
+.topbar nav a:hover{color:var(--paper)}
+@media(max-width:780px){.topbar nav{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:76px 0 88px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero h1{font-size:clamp(38px,4.6vw,58px)}
+.hero h1 em{font-style:italic;color:var(--brand-lt)}
+.lede{font-size:19px;color:#C6D0CE;margin-top:24px;max-width:40ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:34px}
+.btn{
+  display:inline-block;background:var(--brand);color:#fff;text-decoration:none;
+  padding:15px 28px;border-radius:3px;font-weight:600;font-size:16px;border:0;cursor:pointer;
+  font-family:inherit;transition:background .18s ease;
+}
+.btn:hover{background:#2A857C}
+.btn-ghost{background:transparent;border:1px solid var(--rule);color:var(--paper)}
+.btn-ghost:hover{background:var(--ink-3)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:44px}.hero{padding:52px 0 64px}}
+
+/* ---------- janela de busca (assinatura) ---------- */
+.serp{
+  background:var(--paper-2);color:#1A2124;border-radius:8px;overflow:hidden;
+  box-shadow:0 26px 60px rgba(0,0,0,.5);
+}
+.serp-bar{
+  display:flex;align-items:center;gap:9px;padding:11px 14px;
+  background:#E2E7E5;border-bottom:1px solid #D0D7D5;
+}
+.dot{width:10px;height:10px;border-radius:50%;background:#C3CBC9}
+.serp-url{
+  flex:1;background:#fff;border-radius:20px;padding:5px 14px;margin-left:6px;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:#5C6968;
+}
+.serp-body{padding:20px 22px 8px}
+.serp-q{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;color:#6B7876;
+  padding-bottom:14px;border-bottom:1px solid #E4E9E7;margin-bottom:6px;
+}
+.res{padding:16px 0;border-bottom:1px solid #EDF1EF;position:relative}
+.res:last-of-type{border-bottom:0}
+.res .src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:#6B7876}
+.res .ttl{color:#1A4C8B;font-size:16.5px;margin:3px 0 4px;font-weight:500}
+.res .snp{font-size:13.5px;color:#556260;line-height:1.5}
+.tag{
+  display:inline-flex;align-items:center;gap:7px;margin-top:11px;
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;
+  padding:4px 10px;border-radius:3px;font-weight:500;
+  opacity:0;transform:translateY(5px);transition:opacity .5s ease,transform .5s ease;
+}
+.res.on .tag{opacity:1;transform:none}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.t-a{background:rgba(46,125,91,.12);color:var(--verde)}
+.t-b{background:rgba(176,120,28,.13);color:var(--ambar)}
+.t-d{background:rgba(166,58,46,.11);color:var(--tijolo)}
+.serp-foot{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;
+  padding:15px 22px;background:#E9EEEC;border-top:1px solid #D9E0DE;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:#4E5B59;
+}
+.serp-foot b{color:#1A2124}
+.replay{
+  background:none;border:1px solid #C7D0CE;border-radius:3px;cursor:pointer;
+  font-family:inherit;font-size:11.5px;color:#4E5B59;padding:5px 11px;
+}
+.replay:hover{background:#fff}
+
+/* ---------- seções ---------- */
+section{padding:88px 0;border-top:1px solid var(--rule)}
+.sec-head{max-width:64ch;margin-bottom:46px}
+.sec-head h2{font-size:clamp(28px,3.1vw,38px)}
+.sec-head p{color:#B3BFBD;margin-top:18px;font-size:18px}
+
+/* não fazemos */
+.nolist{display:grid;grid-template-columns:repeat(2,1fr);gap:0 44px}
+.nolist li{
+  list-style:none;padding:20px 0;border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:26px 1fr;gap:14px;align-items:start;
+}
+.nolist .x{color:var(--tijolo);font-size:19px;line-height:1.3;font-family:"IBM Plex Mono",monospace}
+.nolist b{display:block;font-weight:600;margin-bottom:3px}
+.nolist span{color:var(--mist);font-size:15px;line-height:1.55}
+@media(max-width:820px){.nolist{grid-template-columns:1fr}}
+
+/* citação legal */
+.quote{
+  border-left:2px solid var(--brand-lt);padding:6px 0 6px 28px;margin:34px 0;
+  font-family:Spectral,serif;font-size:21px;font-style:italic;color:#D5DDDB;line-height:1.5;
+}
+.quote cite{
+  display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;
+  font-size:12px;letter-spacing:.06em;color:var(--mist);margin-top:14px;
+}
+
+/* camadas */
+.layers{display:grid;gap:18px;counter-reset:l}
+.layer{
+  display:grid;grid-template-columns:64px 1fr;gap:26px;align-items:start;
+  background:var(--ink-2);border:1px solid var(--rule);border-radius:5px;padding:26px 28px;
+}
+.layer .n{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--brand-lt);
+  border:1px solid rgba(79,167,156,.3);border-radius:3px;text-align:center;padding:7px 0;
+}
+.layer h3{font-size:20px;margin-bottom:8px}
+.layer p{color:var(--mist);font-size:15.5px;margin:0}
+@media(max-width:640px){.layer{grid-template-columns:1fr;gap:14px}.layer .n{width:64px}}
+
+/* processo */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:5px;overflow:hidden}
+.step{background:var(--ink);padding:30px 26px}
+.step .k{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--brand-lt);margin-bottom:16px}
+.step h3{font-size:19px;margin-bottom:10px}
+.step p{color:var(--mist);font-size:15px;margin:0}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* preço */
+.price-card{
+  background:var(--ink-2);border:1px solid var(--rule);border-radius:6px;
+  padding:44px;display:grid;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center;
+}
+.price-num{font-family:Spectral,serif;font-size:64px;line-height:1;letter-spacing:-.03em}
+.price-num small{font-size:22px;color:var(--mist);display:block;margin-bottom:8px;letter-spacing:0}
+.price-card ul{margin:0;padding-left:20px;color:#C0CAC8}
+.price-card li{margin-bottom:11px}
+.price-note{color:var(--mist);font-size:14.5px;margin-top:26px}
+@media(max-width:820px){.price-card{grid-template-columns:1fr;gap:30px;padding:32px}}
+
+/* faq */
+.faq details{border-bottom:1px solid var(--rule);padding:22px 0}
+.faq summary{
+  cursor:pointer;font-family:Spectral,serif;font-size:20px;list-style:none;
+  display:flex;justify-content:space-between;gap:20px;align-items:baseline;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--brand-lt);font-family:"IBM Plex Mono",monospace;font-size:19px}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--mist);font-size:16px;margin:16px 0 0;max-width:72ch}
+
+/* form */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+label{display:block;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);margin:0 0 8px}
+input{
+  width:100%;background:var(--ink-2);border:1px solid var(--rule);border-radius:3px;
+  color:var(--paper);font-family:inherit;font-size:16px;padding:13px 15px;margin-bottom:22px;
+}
+input:hover{border-color:rgba(237,240,239,.24)}
+.form-note{color:var(--mist);font-size:14px;margin-top:18px}
+.sent{color:var(--brand-lt);font-size:15px;margin-top:16px}
+@media(max-width:820px){.form-grid{grid-template-columns:1fr;gap:38px}}
+
+footer{border-top:1px solid var(--rule);padding:48px 0 64px;color:var(--mist);font-size:14px}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between}
+.todo{color:var(--ambar);font-family:"IBM Plex Mono",monospace;font-size:12px}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .tag{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo">M<b>3</b>sec</div>
+    <nav>
+      <a href="#limites">O que não fazemos</a>
+      <a href="#camadas">Como funciona</a>
+      <a href="#preco">Preço</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" style="border-top:0">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Proteção de dados pessoais</p>
+      <h1>Você pesquisou seu nome<br>e encontrou <em>aquilo</em>.</h1>
+      <p class="lede">Analisamos cada resultado que aparece sobre você, dizemos com franqueza o que sai, o que talvez saia e o que não sai — e não cobramos pelo que não sai.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#contato">Solicitar diagnóstico</a>
+        <a class="btn btn-ghost" href="#limites">Ver o que não fazemos</a>
+      </div>
+    </div>
+
+    <div class="serp" id="demo">
+      <div class="serp-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="serp-url">busca de resultados sobre você</span>
+      </div>
+      <div class="serp-body">
+        <p class="serp-q">3 resultados encontrados para o seu nome</p>
+
+        <article class="res">
+          <div class="src">base de dados jurídicos · processo</div>
+          <div class="ttl">Inquérito arquivado — 2019</div>
+          <p class="snp">Registro público de inquérito encerrado sem oferecimento de denúncia.</p>
+          <span class="tag t-a">Alta chance de remoção</span>
+        </article>
+
+        <article class="res">
+          <div class="src">agregador de dados · perfil</div>
+          <div class="ttl">Endereço residencial e telefone</div>
+          <p class="snp">Dados de contato indexados e exibidos junto ao seu nome completo.</p>
+          <span class="tag t-a">Alta chance de remoção</span>
+        </article>
+
+        <article class="res">
+          <div class="src">portal de notícias · reportagem</div>
+          <div class="ttl">Matéria jornalística de 2021</div>
+          <p class="snp">Publicação verdadeira, obtida licitamente, dentro da liberdade de imprensa.</p>
+          <span class="tag t-d">Não removemos — R$ 0</span>
+        </article>
+      </div>
+      <div class="serp-foot">
+        <span><b>2</b> itens executáveis · <b>1</b> item sem cobrança</span>
+        <button class="replay" id="replay" type="button">Classificar de novo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="limites">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Limites declarados</p>
+      <h2>O que a M3sec não faz</h2>
+      <p>Esta lista costuma ser escondida. Nós abrimos com ela, porque é o que separa um serviço sério de uma promessa que ninguém consegue cumprir.</p>
+    </div>
+    <ul class="nolist">
+      <li><span class="x">✕</span><div><b>Não removemos matéria jornalística verdadeira</b><span>Conteúdo apurado e licitamente publicado não sai. Quem promete isso está vendendo algo que a lei brasileira não permite entregar.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não prometemos resultado</b><span>Vendemos análise e execução qualificada. Você recebe o prognóstico item a item, por escrito, antes de decidir.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não cobramos pelo que não tem chance</b><span>Itens sem viabilidade aparecem no seu relatório marcados como não executáveis, com valor zero.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não atendemos pedidos sobre terceiros</b><span>Só trabalhamos com o próprio titular dos dados, mediante verificação de identidade.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não acessamos suas credenciais</b><span>A assinatura no gov.br é pessoal e intransferível. Você assina no seu próprio dispositivo, sempre.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não aceitamos qualquer caso</b><span>Recusamos pedidos que sirvam para ocultar informação de interesse público ou lesar terceiros. Sem exceção por valor.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">O que quase ninguém conta</p>
+      <h2>O “direito ao esquecimento” não existe no Brasil</h2>
+      <p>Em 2021, ao julgar o Tema 786 em repercussão geral, o Supremo Tribunal Federal fixou a tese:</p>
+    </div>
+    <blockquote class="quote">
+      É incompatível com a Constituição a ideia de um direito ao esquecimento, assim entendido como o poder de obstar, em razão da passagem do tempo, a divulgação de fatos ou dados verídicos e licitamente obtidos e publicados em meios de comunicação social analógicos ou digitais.
+      <cite>STF · RE 1.010.606 · Tema 786 · acórdão publicado em 20/05/2021</cite>
+    </blockquote>
+    <p style="max-width:68ch;color:#B3BFBD">Na prática: não existe um botão para apagar o passado, e nenhuma empresa tem acesso privilegiado a um. O que existe são fundamentos jurídicos específicos — proteção de dados pessoais, sigilo processual, dados sensíveis, desindexação por nome — que se aplicam a alguns casos e não a outros.</p>
+    <p style="max-width:68ch;color:#B3BFBD">Saber distinguir uns dos outros, antes de cobrar, é o trabalho.</p>
+  </div>
+</section>
+
+<section id="camadas">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Onde a informação está</p>
+      <h2>Uma informação, três lugares</h2>
+      <p>Tirar um resultado do Google sem tratar a origem é enxugar gelo: ele volta na próxima varredura. A ordem do trabalho não é opcional.</p>
+    </div>
+    <div class="layers">
+      <div class="layer">
+        <div class="n">01</div>
+        <div><h3>A fonte</h3><p>Tribunais e diários oficiais, onde o dado nasce. É a única camada em que a remoção é definitiva — e a que a maioria dos serviços ignora.</p></div>
+      </div>
+      <div class="layer">
+        <div class="n">02</div>
+        <div><h3>As plataformas</h3><p>Bases que reúnem e reorganizam dados públicos. Aqui atuam os pedidos administrativos fundamentados na Lei Geral de Proteção de Dados.</p></div>
+      </div>
+      <div class="layer">
+        <div class="n">03</div>
+        <div><h3>Os buscadores</h3><p>A camada mais visível e a menos definitiva. A desindexação retira o resultado da busca pelo seu nome, sem apagar a página de origem.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Processo</p>
+      <h2>Como funciona</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="k">ETAPA 01</div><h3>Diagnóstico</h3><p>Varredura completa do seu nome. Cada resultado entra no relatório com viabilidade, fundamento e preço. Prazo de 48 horas.</p></div>
+      <div class="step"><div class="k">ETAPA 02</div><h3>Sua decisão</h3><p>Você escolhe item a item o que quer que seja executado. Nada acontece sem contrato e autorização assinada por você.</p></div>
+      <div class="step"><div class="k">ETAPA 03</div><h3>Execução</h3><p>Solicitações protocoladas na ordem correta, com número de protocolo e acompanhamento até a resposta de cada canal.</p></div>
+      <div class="step"><div class="k">ETAPA 04</div><h3>Verificação</h3><p>Conferimos em busca anônima se o resultado saiu de fato. Só há cobrança de êxito depois dessa confirmação.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="preco">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Preço</p>
+      <h2>Um preço público: o diagnóstico</h2>
+      <p>Ele é pago porque dá trabalho de verdade — e porque é ele que impede a gente de vender esperança para quem não tem caso.</p>
+    </div>
+    <div class="price-card">
+      <div>
+        <div class="price-num"><small>R$</small>197</div>
+        <p style="color:var(--mist);margin-top:16px;font-size:15px">Pagamento único · resposta em 48 horas</p>
+      </div>
+      <ul>
+        <li>Varredura em buscadores, bases jurídicas e agregadores</li>
+        <li>Cada resultado classificado por viabilidade real de remoção</li>
+        <li>Fundamento jurídico e camada de atuação indicados item a item</li>
+        <li>Itens sem viabilidade listados com valor zero, sem cobrança</li>
+        <li>Orçamento de execução apresentado só depois, e só do que faz sentido</li>
+      </ul>
+    </div>
+    <p class="price-note">A execução é orçada caso a caso e boa parte dela é cobrada por êxito — ou seja, depois que o resultado sai. O monitoramento contínuo, para quem quiser manter acompanhamento, é contratado à parte.</p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Dúvidas</p><h2>Perguntas frequentes</h2></div>
+    <details><summary>Vocês garantem que o resultado vai sair?</summary><p>Não, e desconfie de quem garantir. O que entregamos é uma avaliação honesta da chance de cada item, por escrito, antes de você gastar com execução. Em boa parte dos casos a cobrança de execução só acontece depois que o resultado efetivamente sai.</p></details>
+    <details><summary>Por que vocês não removem notícias?</summary><p>Porque o Supremo Tribunal Federal decidiu, em 2021, que não existe direito ao esquecimento no Brasil. Conteúdo jornalístico verdadeiro e licitamente publicado não é removível pela passagem do tempo. Exceções pontuais existem quando há erro factual comprovável, e essas nós analisamos.</p></details>
+    <details><summary>Quanto tempo demora?</summary><p>O diagnóstico sai em 48 horas. A execução varia conforme a camada e o canal envolvidos: alguns pedidos são respondidos em dias, outros levam semanas. Cada item do seu relatório vem com o prazo estimado dele.</p></details>
+    <details><summary>Posso pedir a remoção de dados de outra pessoa?</summary><p>Não. Trabalhamos exclusivamente com o titular dos dados, e as próprias plataformas exigem verificação de identidade justamente para impedir pedidos de terceiros.</p></details>
+    <details><summary>O que acontece se o pedido for negado?</summary><p>Você é informado com a resposta na íntegra. A partir daí avaliamos juntos se cabe recurso, se o caso comporta medida judicial — encaminhada a advogado parceiro — ou se o melhor é encerrar. Você não paga êxito por item que não saiu.</p></details>
+    <details><summary>Vocês são um escritório de advocacia?</summary><p>Não. A M3sec atua na esfera administrativa, com base nos direitos do titular previstos na Lei Geral de Proteção de Dados. Quando um caso exige medida judicial, ele é encaminhado a advogado parceiro, com contrato próprio e independente.</p></details>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap form-grid">
+    <div>
+      <p class="eyebrow">Primeiro contato</p>
+      <h2 style="font-size:clamp(28px,3.1vw,38px)">Comece pelo diagnóstico</h2>
+      <p style="color:#B3BFBD;margin-top:18px">Deixe seus dados de contato. Retornamos para entender seu caso e verificar sua identidade antes de qualquer análise.</p>
+      <p style="color:var(--mist);font-size:15px">Não envie aqui links, número de processo ou detalhes do seu caso. Esses dados só são coletados depois, em canal seguro e com contrato assinado.</p>
+    </div>
+    <form id="lead" novalidate>
+      <label for="nome">Nome completo</label>
+      <input id="nome" name="nome" type="text" autocomplete="name" required>
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="fone">Telefone</label>
+      <input id="fone" name="fone" type="tel" autocomplete="tel" required>
+      <button class="btn" type="submit">Solicitar contato</button>
+      <p class="form-note">Ao enviar, você concorda com o tratamento dos seus dados de contato conforme a nossa <a href="#">Política de Privacidade</a>. <span class="todo">[substituir pelo link real]</span></p>
+      <p class="sent" id="sent" hidden>Recebido. Retornamos em até um dia útil.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="logo" style="margin-bottom:10px">M<b>3</b>sec</div>
+      <p style="margin:0">Proteção de dados pessoais e desindexação.</p>
+    </div>
+    <div>
+      <p style="margin:0 0 6px"><span class="todo">[Razão social] · CNPJ [a preencher]</span></p>
+      <p style="margin:0 0 6px"><span class="todo">[Endereço]</span></p>
+      <p style="margin:0"><span class="todo">Encarregado de dados (DPO): [e-mail]</span></p>
+    </div>
+    <div>
+      <p style="margin:0 0 6px"><a href="#">Política de Privacidade</a> <span class="todo">[criar]</span></p>
+      <p style="margin:0 0 6px"><a href="#">Termos de Uso</a> <span class="todo">[criar]</span></p>
+      <p style="margin:0;max-width:34ch">A M3sec não presta serviços de advocacia. Casos que exigem medida judicial são encaminhados a advogado parceiro.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var res = document.querySelectorAll('#demo .res');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function run(){
+    res.forEach(function(r){ r.classList.remove('on'); });
+    if (reduce){ res.forEach(function(r){ r.classList.add('on'); }); return; }
+    res.forEach(function(r,i){ setTimeout(function(){ r.classList.add('on'); }, 650 + i*550); });
+  }
+
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ run(); io.disconnect(); } });
+    }, {threshold:.4});
+    io.observe(document.getElementById('demo'));
+  } else { run(); }
+
+  document.getElementById('replay').addEventListener('click', run);
+
+  // Formulário: sem backend. Conectar ao API Gateway / Lambda antes de publicar.
+  document.getElementById('lead').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = e.target;
+    if(!f.nome.value.trim() || !f.email.value.trim() || !f.fone.value.trim()){
+      alert('Preencha nome, e-mail e telefone.'); return;
+    }
+    // TODO: fetch('SUA_URL_DO_ENDPOINT', {method:'POST', body: new FormData(f)})
+    document.getElementById('sent').hidden = false;
+    f.reset();
+  });
+})();
+</script>
+</body>
+</html>
