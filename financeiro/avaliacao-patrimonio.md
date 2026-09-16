@@ -22,7 +22,7 @@ Mão de obra especializada (R$ 100/hora geral + R$ 129/hora para DevOps/DevSecOp
 | Falta construir (1.370h) | R$ 148.310 |
 | Opex AWS produção (500–1.000 usuários) | R$ 2.880–4.560/mês (R$ 34.500–54.700/ano) — não entra no total acima |
 
-A taxa de R$ 100/hora (trabalho geral) foi definida pelo fundador; a taxa de R$ 129/hora (DevOps/DevSecOps) vem de pesquisa de salário de mercado para profissional sênior no Brasil — ver seção 7. A seção 6 mostra o mesmo levantamento com taxas de mercado por especialidade em todas as frentes, para referência — o intervalo entre metodologias vai de **R$ 172 mil a R$ 289 mil**.
+A taxa de R$ 100/hora (trabalho geral) foi definida pelo fundador; a taxa de R$ 129/hora (DevOps/DevSecOps) vem de pesquisa de salário de mercado para profissional sênior no Brasil — ver seção 7. A seção 6 mostra o mesmo levantamento com taxas de mercado pesquisadas em todas as frentes, para referência — o intervalo entre metodologias vai de **R$ 172 mil a R$ 193 mil**.
 
 ---
 
@@ -121,22 +121,22 @@ Câmbio de referência usado nos dois cenários: R$ 5,40/US$ — confirme a cota
 
 ## 6. Cenário alternativo — taxas de mercado por especialidade
 
-Mesma lista de horas da seção 3, com taxa de mercado variável por senioridade/complexidade em *todas* as frentes (não só DevOps/DevSecOps), em vez das taxas mistas da seção 3. Útil como teto de comparação.
+Mesma lista de horas da seção 3, mas agora com **todas** as taxas pesquisadas em fontes de mercado (não só DevOps/DevSecOps) — ver fontes e cálculo na seção 7. Útil como teto de comparação com a taxa geral de R$ 100/hora definida pelo fundador.
 
 | Frente de trabalho | Horas | R$/hora | Valor |
 |---|---:|---:|---:|
-| Pesquisa de negócio / compliance | 120h | 150 | R$ 18.000 |
-| Marca / design | 60h | 100 | R$ 6.000 |
-| Documentação | 50h | 100 | R$ 5.000 |
-| Arquitetura AWS sênior | 180h | 250 | R$ 45.000 |
-| DevSecOps sênior | 140h | 280 | R$ 39.200 |
-| Backend / automação | 400h | 180 | R$ 72.000 |
-| App mobile | 500h | 150 | R$ 75.000 |
-| Gateway de pagamento | 80h | 180 | R$ 14.400 |
-| CI/CD | 70h | 200 | R$ 14.000 |
-| **Total (+ legal/domínios: R$ 416)** | **1.600h** | | **R$ 289.016** |
+| Pesquisa de negócio / compliance | 120h | 85 | R$ 10.200 |
+| Marca / design | 60h | 109 | R$ 6.540 |
+| Documentação | 50h | 69 | R$ 3.450 |
+| Arquitetura AWS sênior | 180h | 129 | R$ 23.220 |
+| DevSecOps sênior | 140h | 129 | R$ 18.060 |
+| Backend / automação | 400h | 125 | R$ 50.000 |
+| App mobile | 500h | 125 | R$ 62.500 |
+| Gateway de pagamento | 80h | 125 | R$ 10.000 |
+| CI/CD | 70h | 129 | R$ 9.030 |
+| **Total (+ legal/domínios: R$ 416)** | **1.600h** | | **R$ 193.416** |
 
-Com a taxa de DevOps/DevSecOps já pesquisada (R$ 129/hora, seção 3), a diferença entre os dois cenários cai para **R$ 117,3 mil** — explicada principalmente pela taxa geral de R$ 100/hora (definida pelo fundador) ficar abaixo do mercado para pesquisa de negócio, design, backend, app e gateway de pagamento (R$ 100–200/hora nessas frentes).
+Com todas as taxas pesquisadas em fontes de mercado, o cenário alternativo caiu de R$ 289 mil (estimativas próprias anteriores) para **R$ 193.416** — mais perto do custo de reposição com taxa geral definida pelo fundador (R$ 171.726). A diferença entre os dois agora é de **R$ 21,7 mil**, quase toda concentrada na taxa geral de R$ 100/hora ficar levemente abaixo do mercado para backend, app mobile e design.
 
 ---
 
@@ -182,6 +182,22 @@ Taxa PJ/hora = (salário × 1,6 de encargos/benefícios) ÷ 160h/mês
 O multiplicador de 1,6× e a jornada de 160h/mês são convenções comuns para converter salário CLT em taxa PJ/freelance no Brasil (cobrem 13º, FGTS, INSS patronal, férias e ausência de estabilidade que um contratante PJ precisa embutir no preço) — não são um dado de mercado citável, e podem ser ajustados.
 
 As linhas "referência cruzada" não entraram no cálculo, mas mostram que R$ 129/h está acima da média geral de mercado (R$ 8.300–10.100/mês, perfil pleno) e coerente com a faixa sênior — o que é esperado, já que arquitetura de infraestrutura e hardening de segurança são trabalho sênior.
+
+### Cálculo das demais taxas do cenário de mercado (seção 6)
+
+Mesma pesquisa (16/09/2026), mesma fórmula (salário sênior × 1,6 ÷ 160h/mês), aplicada às outras frentes de trabalho:
+
+| Frente | Fonte | Cargo/nível | Salário mensal (BRL) | Taxa/hora |
+|---|---|---|---:|---:|
+| Pesquisa de negócio / compliance | [Glassdoor Brasil](https://www.glassdoor.com.br/Sal%C3%A1rios/consultor-em-lgpd-sal%C3%A1rio-SRCH_KO0,17.htm) | Consultor em LGPD | R$ 8.500 | R$ 85 |
+| Marca / design | [Glassdoor Brasil](https://www.glassdoor.com.br/Sal%C3%A1rios/designer-ui-ux-senior-sal%C3%A1rio-SRCH_KO0,21.htm), [2](https://www.glassdoor.com.br/Sal%C3%A1rios/senior-ux-ui-designer-sal%C3%A1rio-SRCH_KO0,21.htm), [3](https://www.glassdoor.com.br/Sal%C3%A1rios/senior-ui-designer-sal%C3%A1rio-SRCH_KO0,18.htm) | UI/UX Designer sênior (média de 3 variações de título: R$ 9.752 / R$ 8.775 / R$ 14.167) | R$ 10.898 | R$ 109 |
+| Documentação | [Salário.com.br](https://www.salario.com.br/profissao/redator-de-textos-tecnicos-cbo-261530/) | Redator de Textos Técnicos, sênior | R$ 6.854,78 | R$ 69 |
+| Backend / automação | [Glassdoor Brasil](https://www.glassdoor.com.br/Sal%C3%A1rios/desenvolvedor-backend-senior-sal%C3%A1rio-SRCH_KO0,28.htm) | Desenvolvedor Backend, sênior | R$ 12.500 | R$ 125 |
+| App mobile | [Glassdoor Brasil](https://www.glassdoor.com.br/Sal%C3%A1rios/desenvolvedor-mobile-s%C3%AAnior-sal%C3%A1rio-SRCH_KO0,27.htm), [2](https://www.glassdoor.com.br/Sal%C3%A1rios/desenvolvedor-android-senior-sal%C3%A1rio-SRCH_KO0,28.htm), [3](https://www.glassdoor.com.br/Sal%C3%A1rios/senior-mobile-developer-sal%C3%A1rio-SRCH_KO0,23.htm) | Desenvolvedor Mobile sênior (média de 3 variações: R$ 12.208 / R$ 12.762 / R$ 12.550) | R$ 12.507 | R$ 125 |
+| Gateway de pagamento | — | Sem cargo específico no mercado; assumido igual a Backend (integração de API é trabalho de backend) | — | R$ 125 |
+| Arquitetura AWS / DevSecOps / CI-CD | ver tabela DevOps acima | Senior DevOps Engineer | R$ 12.899,75 | R$ 129 |
+
+**Nota:** valores de designer, redator e desenvolvedor mobile são a média simples de duas ou três variações de título coletadas no Glassdoor para a mesma função, já que buscas com nomenclaturas diferentes (ex.: "UX UI Designer" vs. "Designer UI UX Senior") retornam amostras distintas.
 
 ---
 
