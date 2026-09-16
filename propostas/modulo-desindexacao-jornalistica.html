@@ -1,0 +1,504 @@
+<title>M2sec — Módulo: Matéria Jornalística</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,500;0,600;1,300;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101618;
+  --ink-2:#182124;
+  --ink-3:#222E31;
+  --paper:#EDF0EF;
+  --paper-2:#FBFCFB;
+  --brand:#1E6B64;
+  --brand-lt:#4FA79C;
+  --verde:#2E7D5B;
+  --ambar:#B0781C;
+  --laranja:#B0521C;
+  --tijolo:#A63A2E;
+  --mist:#8A9997;
+  --rule:rgba(237,240,239,.12);
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Spectral,Georgia,serif;font-weight:500;letter-spacing:-.015em;line-height:1.15;margin:0}
+p{margin:0 0 1em}
+a{color:var(--brand-lt)}
+:focus-visible{outline:2px solid var(--brand-lt);outline-offset:3px;border-radius:2px}
+strong{color:var(--paper);font-weight:600}
+
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--mist);margin:0 0 18px;
+}
+
+/* ---------- topo ---------- */
+.topbar{border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--ink);z-index:10}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:24px}
+.logo{font-family:Spectral,serif;font-size:20px;letter-spacing:-.02em;white-space:nowrap}
+.logo b{color:var(--brand-lt);font-weight:600}
+.topbar nav{display:flex;gap:22px;font-size:13.5px;overflow-x:auto}
+.topbar nav a{color:var(--mist);text-decoration:none;white-space:nowrap}
+.topbar nav a:hover{color:var(--paper)}
+@media(max-width:860px){.topbar nav{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 56px}
+.hero h1{font-size:clamp(30px,3.6vw,44px);max-width:20ch;text-wrap:balance}
+.lede{font-size:19px;color:#C6D0CE;margin-top:22px;max-width:62ch}
+.hero-note{
+  margin-top:28px;padding:18px 22px;background:var(--ink-2);border:1px solid var(--rule);
+  border-left:3px solid var(--tijolo);border-radius:4px;max-width:72ch;
+}
+.hero-note p{margin:0;color:#D5DDDB;font-size:15.5px}
+.hero-note b{color:var(--paper)}
+
+/* ---------- seções ---------- */
+section{padding:64px 0;border-top:1px solid var(--rule)}
+.sec-head{max-width:68ch;margin-bottom:36px}
+.sec-head h2{font-size:clamp(24px,2.6vw,32px)}
+.sec-head p{color:#B3BFBD;margin-top:14px;font-size:16.5px}
+
+/* citação legal */
+.quote{
+  border-left:2px solid var(--brand-lt);padding:4px 0 4px 24px;margin:22px 0;
+  font-family:Spectral,serif;font-style:italic;font-size:18px;color:#D5DDDB;line-height:1.55;
+}
+.quote cite{
+  display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;
+  font-size:11.5px;letter-spacing:.05em;color:var(--mist);margin-top:10px;
+}
+
+/* tabela de fundamentos */
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--mist);font-weight:500;padding:0 16px 10px 0;
+  border-bottom:1px solid var(--rule);
+}
+.tbl td{padding:14px 16px 14px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:#C6D0CE}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child,.tbl th:first-child{padding-left:0}
+.tbl-wrap{overflow-x:auto;margin:8px 0}
+.tbl .num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;color:var(--paper);white-space:nowrap}
+.tbl b{color:var(--paper)}
+
+/* camadas */
+.layers{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+.layer{
+  background:var(--ink-2);border:1px solid var(--rule);border-radius:5px;padding:24px 24px 22px;
+}
+.layer .n{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--brand-lt);
+  border:1px solid rgba(79,167,156,.3);border-radius:3px;display:inline-block;padding:5px 10px;margin-bottom:14px;
+}
+.layer h3{font-size:19px;margin-bottom:8px}
+.layer p{color:var(--mist);font-size:14.5px;margin:0}
+.layer .arrow{display:none}
+@media(max-width:860px){.layers{grid-template-columns:1fr}}
+
+/* checklist de qualificação */
+.checklist{list-style:none;margin:0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.check-item{background:var(--ink-2);padding:18px 20px;display:grid;grid-template-columns:22px 1fr auto;gap:16px;align-items:start}
+.check-item .box{
+  width:18px;height:18px;border:1.5px solid var(--mist);border-radius:3px;margin-top:2px;flex-shrink:0;
+}
+.check-item .q{color:#D5DDDB;font-size:15.5px;line-height:1.5}
+.check-item .q small{display:block;color:var(--mist);font-size:13px;margin-top:4px}
+.route{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;
+  padding:5px 10px;border-radius:3px;white-space:nowrap;height:fit-content;font-weight:500;
+}
+.r-a{background:rgba(46,125,91,.14);color:var(--verde)}
+.r-b{background:rgba(176,120,28,.15);color:var(--ambar)}
+.r-c{background:rgba(176,82,28,.15);color:var(--laranja)}
+.r-d{background:rgba(166,58,46,.14);color:var(--tijolo)}
+.r-x{background:rgba(138,153,151,.15);color:var(--mist)}
+@media(max-width:640px){.check-item{grid-template-columns:18px 1fr}.route{grid-column:2}}
+
+.decision{
+  margin-top:22px;padding:20px 22px;background:var(--ink-2);border:1px solid var(--rule);border-radius:6px;
+  font-size:14.5px;color:#B3BFBD;
+}
+.decision b{color:var(--paper)}
+
+/* faixas */
+.faixa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.faixa{background:var(--ink-2);padding:24px 22px;border-top:3px solid var(--mist)}
+.faixa.fa-a{border-top-color:var(--verde)}
+.faixa.fa-b{border-top-color:var(--ambar)}
+.faixa.fa-c{border-top-color:var(--laranja)}
+.faixa.fa-d{border-top-color:var(--tijolo)}
+.faixa .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);margin-bottom:10px}
+.faixa h3{font-size:18px;margin-bottom:4px}
+.faixa .pct{font-family:"IBM Plex Mono",monospace;font-size:13px;margin-bottom:12px;font-variant-numeric:tabular-nums}
+.faixa.fa-a .pct{color:var(--verde)}
+.faixa.fa-b .pct{color:var(--ambar)}
+.faixa.fa-c .pct{color:var(--laranja)}
+.faixa.fa-d .pct{color:var(--tijolo)}
+.faixa p{color:var(--mist);font-size:14px;margin:0 0 10px}
+.faixa .ex{font-size:13px;color:#9CA9A7;font-style:italic}
+@media(max-width:900px){.faixa-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.faixa-grid{grid-template-columns:1fr}}
+
+/* preço */
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.price-card{
+  background:var(--ink-2);border:1px solid var(--rule);border-radius:6px;padding:24px 22px;
+}
+.price-card .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);margin-bottom:12px}
+.price-card .v{font-family:Spectral,serif;font-size:26px;letter-spacing:-.02em;margin-bottom:4px}
+.price-card .v small{font-size:14px;color:var(--mist);font-family:"IBM Plex Sans",sans-serif}
+.price-card ul{margin:14px 0 0;padding-left:18px;color:#B3BFBD;font-size:13.5px}
+.price-card li{margin-bottom:7px}
+@media(max-width:900px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.price-grid{grid-template-columns:1fr}}
+.diag-note{
+  margin-top:16px;padding:16px 20px;background:var(--ink-2);border:1px solid var(--rule);border-radius:5px;
+  font-size:14.5px;color:#B3BFBD;
+}
+
+/* não fazemos */
+.nolist{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.nolist li{
+  list-style:none;padding:16px 0;border-bottom:1px solid var(--rule);
+  display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;
+}
+.nolist .x{color:var(--tijolo);font-size:17px;line-height:1.3;font-family:"IBM Plex Mono",monospace}
+.nolist b{display:block;font-weight:600;margin-bottom:2px;font-size:15px}
+.nolist span{color:var(--mist);font-size:14px;line-height:1.5}
+@media(max-width:820px){.nolist{grid-template-columns:1fr}}
+
+/* docs */
+.doclist{columns:2;column-gap:40px;margin:0;padding:0;list-style:none}
+.doclist li{
+  break-inside:avoid;display:flex;gap:10px;align-items:flex-start;padding:9px 0;
+  border-bottom:1px solid var(--rule);font-size:14.5px;color:#C6D0CE;
+}
+.doclist li::before{content:"□";font-family:"IBM Plex Mono",monospace;color:var(--mist);flex-shrink:0}
+@media(max-width:700px){.doclist{columns:1}}
+
+footer{border-top:1px solid var(--rule);padding:36px 0 56px;color:var(--mist);font-size:13.5px}
+footer p{max-width:70ch;margin:0 0 8px}
+footer b{color:var(--paper)}
+
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo">M<b>2</b>sec</div>
+    <nav>
+      <a href="#fundamento">Fundamento</a>
+      <a href="#camadas">Vias de ataque</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#faixas">Faixas &amp; SLA</a>
+      <a href="#preco">Preço</a>
+      <a href="#recusa">O que recusamos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" style="border-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Catálogo M2sec · Proposta de novo módulo</p>
+    <h1>Matéria jornalística: o pedido mais comum e o mais mal-entendido</h1>
+    <p class="lede">É o e-mail que mais chega: <em>"saiu uma matéria sobre mim/minha empresa, não gostamos mais, dá pra tirar do Google?"</em> Este módulo formaliza como a M2sec responde a esse pedido — com uma triagem que separa os casos com fundamento real dos que não têm, antes de cobrar qualquer coisa.</p>
+    <div class="hero-note">
+      <p><b>O exemplo que motivou este documento é, na maioria das vezes, um caso de recusa.</b> Se a matéria é verdadeira, foi obtida licitamente e o único problema é que o cliente não gosta mais dela, o desfecho correto é Faixa D — sem cobrança, sem promessa, com explicação por escrito. Este módulo existe para achar, dentro desse volume de pedidos, a minoria com fundamento jurídico de fato.</p>
+    </div>
+  </div>
+</section>
+
+<section id="fundamento">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Fundamento jurídico</p>
+      <h2>O que sustenta o pedido, e o que não sustenta</h2>
+      <p>A mesma régua do restante do catálogo M2sec se aplica aqui: nada de "direito ao esquecimento" — ele não existe. O que existe é um conjunto de vias específicas, cada uma com um requisito diferente.</p>
+    </div>
+
+    <blockquote class="quote">
+      É incompatível com a Constituição a ideia de um direito ao esquecimento, assim entendido como o poder de obstar, em razão da passagem do tempo, a divulgação de fatos ou dados verídicos e licitamente obtidos e publicados em meios de comunicação social analógicos ou digitais.
+      <cite>STF · RE 1.010.606 · Tema 786 · acórdão publicado em 20/05/2021</cite>
+    </blockquote>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th style="width:22%">Via</th><th style="width:26%">Base legal</th><th>O que exige</th></tr></thead>
+        <tbody>
+          <tr><td><b>Correção direta com o veículo</b></td><td>Não é direito formal — é prática editorial</td><td>Erro pontual comprovável (data, número, foto trocada). Muitos veículos corrigem sem processo, se bem instruído.</td></tr>
+          <tr><td><b>Direito de resposta</b></td><td>Lei 13.188/2015, arts. 3º e 5º</td><td>Prazo decadencial de 60 dias da publicação para notificar o veículo por AR. Não remove a matéria — obriga a publicar o contraponto do cliente.</td></tr>
+          <tr><td><b>Desindexação por nome</b></td><td>Fora do escopo do Tema 786 — o STF não tratou dessa hipótese</td><td>Desproporção entre o dano ao titular e o interesse público remanescente. Não apaga a matéria, tira do resultado de busca pelo nome.</td></tr>
+          <tr><td><b>Dado sensível embutido na matéria</b></td><td>LGPD arts. 5º, II, 11 e 14 — mas art. 4º, II, "a" exclui finalidade jornalística da lei</td><td>Só se sustenta sobre o dado específico (endereço, documento, imagem, dado de saúde/menor) — não sobre o fato jornalístico em si.</td></tr>
+          <tr><td><b>Notificação à plataforma (Google/Bing)</b></td><td>Marco Civil, art. 19 — regime alterado pelo STF em jun/2025 (Temas 987 e 533)</td><td>Desde a decisão de 2025, plataformas podem responder por não agir mesmo sem ordem judicial prévia em certos casos — via ainda em consolidação, mas mais forte que antes.</td></tr>
+          <tr><td><b>Ação judicial de desindexação</b></td><td>CPC + jurisprudência do STJ (via advogado parceiro)</td><td>Petição com URL específica e identificada. Pedido genérico de remoção é nulo por falta de especificidade.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="camadas">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Ordem de ataque</p>
+      <h2>Três frentes, sempre nesta ordem</h2>
+      <p>Atacar o buscador antes do veículo é o erro mais comum do mercado: a URL some da busca e volta na próxima varredura, porque a matéria continua no ar do jeito que estava.</p>
+    </div>
+    <div class="layers">
+      <div class="layer">
+        <div class="n">01 · Veículo</div>
+        <h3>Contato direto e direito de resposta</h3>
+        <p>Pedido de correção, anonimização de um dado pontual, ou notificação formal por AR pedindo resposta/retificação. É a única frente que pode alterar a matéria na origem.</p>
+      </div>
+      <div class="layer">
+        <div class="n">02 · Buscador</div>
+        <h3>Google e réplicas</h3>
+        <p>Se o veículo já alterou a matéria: ferramenta de conteúdo desatualizado. Se há dado pessoal específico exposto: remoção de informações pessoais. Réplicas em agregadores entram no fluxo padrão de plataformas do catálogo.</p>
+      </div>
+      <div class="layer">
+        <div class="n">03 · Judicial</div>
+        <h3>Advogado parceiro</h3>
+        <p>Quando as duas frentes anteriores não resolvem e o caso tem fundamento (Faixa B ou C), a ação de desindexação com URL específica é conduzida por escritório parceiro, contrato próprio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Fase 0 · Qualificação, gratuita</p>
+      <h2>Checklist de qualificação de lead</h2>
+      <p>Aplicado na primeira conversa, antes de vender o diagnóstico pago. Cada resposta aponta para uma faixa provisória — a confirmação definitiva só vem com documento na mão.</p>
+    </div>
+
+    <ul class="checklist">
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">O fato é verdadeiro, foi obtido licitamente, e o único problema apontado é que o cliente <em>não gosta</em> de a matéria existir?
+          <small>Sem erro, sem dado sensível, sem desproporção alegada — só desconforto.</small></span>
+        <span class="route r-d">→ Faixa D</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">O cliente é agente público, figura pública, ou o fato tem relação direta com cargo, candidatura ou atuação profissional relevante?
+          <small>Interesse público qualificado — art. 37 da CF e jurisprudência eleitoral.</small></span>
+        <span class="route r-d">→ Faixa D</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">Existe prova documental de que a informação publicada é factualmente falsa ou foi distorcida?
+          <small>Documento, print, laudo ou decisão que contradiga o afirmado na matéria.</small></span>
+        <span class="route r-b">→ Faixa B</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">A matéria expõe dado sensível sem relação necessária com o fato noticiado — endereço, telefone, documento, imagem de menor, dado de saúde?
+          <small>O pedido recai sobre o dado específico, não sobre o fato em si.</small></span>
+        <span class="route r-b">→ Faixa B</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">Houve absolvição, arquivamento ou extinção de punibilidade posterior à matéria, e isso não está refletido nela?
+          <small>Precisa de certidão. Sem ela, o caso desce para Faixa C.</small></span>
+        <span class="route r-b">→ Faixa B</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">A matéria já foi alterada ou removida pelo próprio veículo, mas ainda aparece em cache ou no índice do Google?</span>
+        <span class="route r-a">→ Faixa A</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">Há desproporção defensável entre o dano ao cliente e o interesse público remanescente, mas sem erro factual comprovável?
+          <small>Só é executável por via judicial — sem garantia de êxito.</small></span>
+        <span class="route r-c">→ Faixa C</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">O pedido é sobre dado ou imagem de terceiro — não do próprio cliente ou empresa solicitante?</span>
+        <span class="route r-x">→ Recusa automática</span>
+      </li>
+      <li class="check-item">
+        <span class="box"></span>
+        <span class="q">A condução do caso, se mal feita, pode virar ela própria notícia — "empresa tenta censurar imprensa"?
+          <small>Sinal de alerta, independente da faixa técnica. Redobrar cautela ou recusar.</small></span>
+        <span class="route r-x">→ Reavaliar</span>
+      </li>
+    </ul>
+
+    <div class="decision">
+      <b>Regra de corte:</b> se apenas a primeira ou a segunda pergunta forem afirmativas — e nenhuma das faixas B/A/C —, o atendimento se encerra na Fase 0. Registrar por escrito, sem cobrar diagnóstico. Se qualquer pergunta de Faixa A/B/C for afirmativa com indício de prova, seguir para o Diagnóstico Editorial pago.
+    </div>
+  </div>
+</section>
+
+<section id="faixas">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Classificação</p>
+      <h2>As quatro faixas, aplicadas à matéria jornalística</h2>
+    </div>
+    <div class="faixa-grid">
+      <div class="faixa fa-a">
+        <div class="k">Faixa A</div>
+        <h3>Já corrigida na fonte</h3>
+        <div class="pct">80–95% de êxito</div>
+        <p>Veículo já alterou ou removeu o trecho/matéria; falta só atualizar o índice do buscador.</p>
+        <p class="ex">Ex.: nome retirado da matéria pelo veículo, mas o Google ainda mostra a versão antiga em cache.</p>
+      </div>
+      <div class="faixa fa-b">
+        <div class="k">Faixa B</div>
+        <h3>Erro ou dado sensível comprovado</h3>
+        <div class="pct">45–75% de êxito</div>
+        <p>Há prova documental de falsidade, ou dado sensível específico exposto sem necessidade jornalística.</p>
+        <p class="ex">Ex.: matéria cita endereço residencial completo do cliente, sem relação com o fato.</p>
+      </div>
+      <div class="faixa fa-c">
+        <div class="k">Faixa C</div>
+        <h3>Desproporção sem erro factual</h3>
+        <div class="pct">15–40% de êxito</div>
+        <p>Só é executável por ação judicial, com advogado parceiro. Sem garantia — cobrança majoritariamente por êxito.</p>
+        <p class="ex">Ex.: fato verdadeiro e antigo, sem interesse público forte, mas sem nenhuma inexatidão a apontar.</p>
+      </div>
+      <div class="faixa fa-d">
+        <div class="k">Faixa D</div>
+        <h3>Recusar</h3>
+        <div class="pct">&lt;10% de êxito</div>
+        <p>Fato verdadeiro, lícito, com interesse público remanescente. Inclui figuras públicas e agentes públicos.</p>
+        <p class="ex">Ex.: o exemplo mais comum — "não gostamos mais dessa matéria".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sla">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Operação</p>
+      <h2>SLA por etapa</h2>
+      <p>Etapas 2 a 5 dependem de terceiros (veículo, Google, Judiciário) — o prazo indicado é o de acompanhamento da M2sec, não uma promessa de resposta alheia.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Etapa</th><th>O que acontece</th><th style="width:15%">Prazo</th><th style="width:18%">Responsável</th></tr></thead>
+        <tbody>
+          <tr><td><b>0 · Qualificação</b></td><td>Checklist aplicado, definição preliminar de faixa</td><td class="num">Mesmo dia</td><td>M2sec</td></tr>
+          <tr><td><b>1 · Diagnóstico editorial</b></td><td>Leitura integral da matéria, comparação com fontes, enquadramento em faixa, parecer preliminar em casos limítrofes</td><td class="num">5 dias úteis</td><td>M2sec + advogado parceiro (B/C)</td></tr>
+          <tr><td><b>2 · Contato com o veículo</b></td><td>Pedido de correção ou anonimização pontual</td><td class="num">até 15 dias corridos</td><td>Veículo · acompanhamento a cada 5 dias</td></tr>
+          <tr><td><b>3 · Direito de resposta</b></td><td>Notificação por AR; se não publicado, ação de rito especial</td><td class="num">7 dias corridos<br>+ até 30 dias (rito)</td><td>Veículo → Judiciário (Lei 13.188, arts. 3º e 5º)</td></tr>
+          <tr><td><b>4 · Ferramentas do Google</b></td><td>Conteúdo desatualizado, remoção de dados pessoais, legal removal request</td><td class="num">~10 dias úteis</td><td>Google</td></tr>
+          <tr><td><b>5 · Via judicial</b></td><td>Ação de obrigação de fazer com URL específica</td><td class="num">Sem prazo garantido</td><td>Advogado parceiro · acompanhamento mensal</td></tr>
+          <tr><td><b>6 · Verificação</b></td><td>Confirmação em busca anônima, print datado</td><td class="num">3 dias úteis</td><td>M2sec</td></tr>
+          <tr><td><b>7 · Monitoramento</b></td><td>Reaparecimento, réplicas, cache</td><td class="num">Varredura mensal</td><td>M2sec</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="preco">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Preço</p>
+      <h2>Precificação do módulo</h2>
+      <p>Mesma lógica do restante do catálogo: o diagnóstico é sempre pago, item de Faixa D nunca é cobrado, êxito só se fatura após verificação.</p>
+    </div>
+
+    <div class="diag-note">
+      <b>Diagnóstico editorial — R$ 297</b>, pagamento único, resposta em 5 dias úteis. Mais caro que o diagnóstico padrão (R$ 197) porque exige leitura integral da matéria, comparação com fontes primárias e, em casos limítrofes de Faixa B/C, parecer preliminar do advogado parceiro.
+    </div>
+
+    <div class="price-grid" style="margin-top:20px">
+      <div class="price-card">
+        <div class="k">Faixa A</div>
+        <div class="v">Incluído<small> na execução</small></div>
+        <ul>
+          <li>Ferramenta de conteúdo desatualizado</li>
+          <li>Êxito: R$ 300–600</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="k">Faixa B</div>
+        <div class="v">R$ 450<small> execução</small></div>
+        <ul>
+          <li>Notificação formal + acompanhamento</li>
+          <li>Êxito: R$ 800–1.800 por item</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="k">Faixa C</div>
+        <div class="v">R$ 0<small> adiantado</small></div>
+        <ul>
+          <li>Repasse de custas conforme o caso</li>
+          <li>Êxito: R$ 2.500+ (honorários do advogado parceiro contratados à parte)</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="k">Faixa D</div>
+        <div class="v">R$ 0<small> recusa</small></div>
+        <ul>
+          <li>Sem execução, sem cobrança</li>
+          <li>Recusa registrada por escrito</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="price-note" style="color:var(--mist);font-size:14.5px;margin-top:22px">Monitoramento pós-caso (reaparecimento, réplicas, cache): R$ 49–99/mês para pessoa física · R$ 300–900/mês para empresa. Para o caso recusado em Faixa D, a alternativa oferecida é o produto de gestão de reputação/SEO do catálogo — um item comercial separado, não uma promessa de remoção.</p>
+  </div>
+</section>
+
+<section id="recusa">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Limites declarados</p>
+      <h2>O que este módulo nunca faz</h2>
+    </div>
+    <ul class="nolist">
+      <li><span class="x">✕</span><div><b>Não remove matéria verdadeira de interesse público</b><span>Inclusive quando o cliente insiste e oferece pagar mais por isso.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não promete resultado em Faixa B ou C</b><span>Prognóstico por escrito, antes de qualquer execução.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não atua contra agente público sobre atos do cargo</b><span>Publicidade dos atos públicos é princípio constitucional, não obstáculo a contornar.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não conduz notificação de forma agressiva ao veículo</b><span>Tom que pareça ameaça de censura pode virar manchete pior que a original.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não atua sobre matéria de terceiro</b><span>Só o titular dos dados, ou a empresa diretamente citada, com verificação.</span></div></li>
+      <li><span class="x">✕</span><div><b>Não pratica ato privativo de advocacia</b><span>Petição, liminar e ação judicial são conduzidas pelo escritório parceiro, contrato próprio.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="documentos">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Instrução do caso</p>
+      <h2>Documentação obrigatória</h2>
+    </div>
+    <ul class="doclist">
+      <li>Print + URL + data de acesso da matéria original</li>
+      <li>Comprovante de tentativa de contato com o veículo (protocolo ou AR)</li>
+      <li>Prova documental do erro factual, quando alegado (Faixa B)</li>
+      <li>Certidão de trânsito em julgado, arquivamento ou extinção de punibilidade, quando aplicável</li>
+      <li>Documento de identidade e CPF/CNPJ do titular ou empresa</li>
+      <li>Procuração específica para as vias notificadas</li>
+      <li>Termo de Ciência de Prognóstico, assinado por faixa</li>
+      <li>Registro de recusa, quando o caso encerra em Faixa D</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>M2sec</b> não presta serviços de advocacia. A via judicial deste módulo (Faixa C e casos de direito de resposta não atendidos) é conduzida por escritório parceiro, com contrato próprio e independente.</p>
+    <p>Documento interno de catálogo — versão 1.0, elaborado a partir da pesquisa jurídica que acompanha esta proposta.</p>
+  </div>
+</footer>

@@ -1,4 +1,4 @@
-# M3sec
+# M2sec
 
 **Digital cleaning e proteção de dados pessoais**
 Desindexação e remoção de informações pessoais em bases jurídicas e motores de busca, com fundamento em LGPD e legislação processual.
@@ -25,11 +25,11 @@ Desindexação e remoção de informações pessoais em bases jurídicas e motor
 
 ## 1. Posicionamento
 
-### O que a M3sec faz
+### O que a M2sec faz
 
 Diagnostica a exposição digital de uma pessoa ou empresa, classifica cada item encontrado por probabilidade real de remoção e executa as solicitações cabíveis nas três camadas (fonte, plataforma, indexador), com acompanhamento e monitoramento contínuo.
 
-### O que a M3sec NÃO faz
+### O que a M2sec NÃO faz
 
 Esta lista é parte da oferta, não uma ressalva. Ela deve aparecer no site, na proposta comercial e no contrato.
 
@@ -41,7 +41,7 @@ Esta lista é parte da oferta, não uma ressalva. Ela deve aparecer no site, na 
 
 ### Diferencial
 
-Em um mercado onde os concorrentes prometem apagar tudo, o ativo da M3sec é **taxa de êxito comprovada e honestidade sobre o que não sai**. O relatório de diagnóstico que recusa cobrar por itens irremovíveis é a principal peça de conversão.
+Em um mercado onde os concorrentes prometem apagar tudo, o ativo da M2sec é **taxa de êxito comprovada e honestidade sobre o que não sai**. O relatório de diagnóstico que recusa cobrar por itens irremovíveis é a principal peça de conversão.
 
 ---
 
@@ -224,7 +224,7 @@ Regra vinculante. Vale para todo membro da equipe, sem exceção por valor de co
 
 **Registro:** toda recusa é documentada com data, motivo e enquadramento. O registro protege a empresa e alimenta o argumento comercial.
 
-**Risco a mitigar:** neste nicho, o cliente que paga melhor pode ser exatamente aquele cuja exposição serve ao interesse público. Uma reportagem sobre "empresa que apaga o passado de criminosos" encerra a M3sec. A política de recusa não é moralismo — é continuidade do negócio.
+**Risco a mitigar:** neste nicho, o cliente que paga melhor pode ser exatamente aquele cuja exposição serve ao interesse público. Uma reportagem sobre "empresa que apaga o passado de criminosos" encerra a M2sec. A política de recusa não é moralismo — é continuidade do negócio.
 
 ---
 
@@ -281,16 +281,16 @@ Por caso, sem exceção:
 
 ### Fronteira OAB
 
-- **Permitido à M3sec:** pedido administrativo com base na LGPD, diagnóstico, monitoramento, gestão documental.
+- **Permitido à M2sec:** pedido administrativo com base na LGPD, diagnóstico, monitoramento, gestão documental.
 - **Privativo de advogado:** petição judicial, pedido de liminar, ação de obrigação de fazer, requerimento de segredo de justiça em juízo.
 
-Onde o caso exige judicialização, o encaminhamento é ao advogado parceiro, com contrato próprio. Atenção às restrições da OAB quanto a captação de clientela e publicidade — o material de marketing da M3sec não pode se apresentar como escritório.
+Onde o caso exige judicialização, o encaminhamento é ao advogado parceiro, com contrato próprio. Atenção às restrições da OAB quanto a captação de clientela e publicidade — o material de marketing da M2sec não pode se apresentar como escritório.
 
 ### gov.br
 
-A assinatura eletrônica gov.br é **pessoal e intransferível**. A M3sec jamais acessa, armazena ou opera credenciais do cliente. No atendimento presencial, o cliente assina no próprio dispositivo, com registro de consentimento.
+A assinatura eletrônica gov.br é **pessoal e intransferível**. A M2sec jamais acessa, armazena ou opera credenciais do cliente. No atendimento presencial, o cliente assina no próprio dispositivo, com registro de consentimento.
 
-### A M3sec como controladora de dados
+### A M2sec como controladora de dados
 
 Ironia operacional a levar a sério: a empresa acumula dossiês de dados sensíveis de pessoas que a procuraram justamente por exposição. Um vazamento aqui é fatal. Requisitos mínimos: criptografia em repouso, controle de acesso por função, log de acesso, política de retenção com descarte definido e proibição de armazenamento em dispositivos pessoais.
 
@@ -374,7 +374,7 @@ Acompanhamento de status por item, upload de documentos, assinatura de termos, h
 
 ⚠️ **Premissa não confirmada.** Não há evidência de API pública de remoção em Jusbrasil, Escavador ou Google — existem formulários. A ferramenta do Google exige verificação de identidade justamente para impedir que terceiros solicitem remoção em nome de outrem.
 
-**Antes de planejar esta fase:** contatar as três plataformas e obter resposta formal sobre existência de API ou canal de parceria, e ler os termos de uso quanto a acesso automatizado. Se a resposta for negativa, o produto correto é fluxo assistido — a M3sec prepara, o cliente conclui com um clique.
+**Antes de planejar esta fase:** contatar as três plataformas e obter resposta formal sobre existência de API ou canal de parceria, e ler os termos de uso quanto a acesso automatizado. Se a resposta for negativa, o produto correto é fluxo assistido — a M2sec prepara, o cliente conclui com um clique.
 
 ---
 

@@ -1,4 +1,4 @@
-# Plano de Marketing — M3Sec
+# Plano de Marketing — M2Sec
 
 Complementa o `README.md` (o modelo de negócio, a matriz de triagem por faixa e a precificação vivem lá). Enquanto aquele decide *o quê* vender e *como* cobrar, este decide *como* as pessoas certas descobrem o serviço e confiam nele. Rascunho de discussão, não plano fechado.
 
@@ -24,7 +24,7 @@ Herdado do `README.md`, não reabrir aqui:
 - Nunca prometer "remoção garantida" — o produto vendido publicamente é **diagnóstico honesto + execução qualificada**, com prognóstico por item (faixa A/B/C/D), nunca garantia de resultado (ver STF Tema 786 no `README.md`)
 - **A qualificação inicial (10 min) é grátis; o diagnóstico completo é sempre pago (R$ 197)** — isso é regra comercial fixa no `README.md` (seção 7), não um detalhe: é o que filtra curioso e cobre o custo real da varredura. Nenhuma peça de marketing deve prometer "diagnóstico grátis"
 - Casos de Faixa D são recusados e aparecem no relatório sem cobrança — isso é ativo de marketing (prova de honestidade), não uma limitação a esconder
-- Casos que exigem ação judicial são **encaminhados a advogado parceiro**, nunca conduzidos como se M3Sec fosse o próprio prestador do ato jurídico
+- Casos que exigem ação judicial são **encaminhados a advogado parceiro**, nunca conduzidos como se M2Sec fosse o próprio prestador do ato jurídico
 - Público primário no Brasil: pessoa com item de Faixa A/B (processo arquivado/absolvido, dado sensível, menor, segredo de justiça) ainda indexado, ou profissional com reputação = ativo de negócio
 
 ---
@@ -82,6 +82,36 @@ O gatilho de conversão mais forte é a pessoa já ter vivido uma consequência 
 3. **Comunidades e grupos profissionais** (associações de classe, grupos de WhatsApp/LinkedIn de categorias mais expostas — médicos, corretores, ex-servidores) — participação genuína antes de qualquer divulgação, mesmo princípio usado no Imersão.
 4. **Conteúdo educativo em LinkedIn** — pessoal, não institucional, mesmo racional do Imersão: "por que remover algo do Google não é um botão", "o que a lei realmente permite remover".
 5. **Mídia paga** — última prioridade, e só depois de mensagem validada; nicho sensível, anúncio mal calibrado pode atrair exatamente o público errado (quem quer esconder crime em andamento).
+
+---
+
+## SEO — palavras-chave e plano de conteúdo
+
+Detalhamento do canal 2 ("SEO/busca orgânica") acima. Prioridade real de investimento de tempo, porque a busca nasce do próprio problema da pessoa — ela já está pesquisando o nome dela — e porque conteúdo educativo é o próprio filtro contra o público errado descrito em "Riscos de marketing": quem lê um artigo que explica com honestidade o que a lei permite e não permite já se autoexclui se o caso dele for Faixa D.
+
+### Palavras-chave por estágio de funil
+
+| Estágio | Palavra-chave | Intenção | Conteúdo que capta |
+|---|---|---|---|
+| Topo | "como saber o que aparece quando pesquisam meu nome" | Informacional | Guia: como fazer a própria varredura antes de contratar qualquer coisa |
+| Topo | "direito ao esquecimento existe no brasil" | Informacional | Artigo âncora citando o Tema 786 do STF — mesmo texto-base do `README.md`, em linguagem leiga |
+| Topo | "recrutador pesquisa nome candidato google" | Informacional | Conteúdo educativo já previsto na persona (estágio "não sabe que tem o problema") |
+| Meio | "como remover processo do jusbrasil" | Transacional-informacional | Passo a passo do pedido administrativo via LGPD, com aviso de quando não funciona |
+| Meio | "processo arquivado ainda aparece no google" | Transacional-informacional | Conteúdo mapeado direto pra Faixa A/B — maior taxa de conversão esperada |
+| Meio | "inquérito arquivado aparece no google" | Transacional-informacional | Mesmo racional acima, público de maior urgência |
+| Meio | "remover dados pessoais busca google" | Transacional-informacional | Explica a ferramenta oficial do Google e onde ela não é suficiente |
+| Fundo | "remover nome do escavador" | Transacional | Página de serviço, CTA para qualificação gratuita |
+| Fundo | "como tirar meu nome do google" | Transacional (alto volume) | Página de serviço principal — mas o H1/copy precisa deixar claro desde a dobra que fato verdadeiro relevante não sai, pra não converter lead de Faixa D |
+| Fundo | "empresa aparece em processo trabalhista google" | Transacional (PJ) | Página de serviço para pessoa jurídica — ticket mais alto |
+| Cauda longa a evitar | "remover notícia negativa do google", "apagar reportagem da internet" | Alto volume, mas atrai exatamente o público de Faixa D | Se produzido, o conteúdo tem que abrir negando a possibilidade — nunca otimizar para converter, só para educar e filtrar |
+
+### Calendário de conteúdo sugerido (3 primeiros meses)
+
+1. **Mês 1 — âncoras institucionais:** "O direito ao esquecimento não existe no Brasil: o que a lei realmente permite" · "Como saber o que aparece sobre você no Google, passo a passo". Objetivo: indexar e virar referência linkável antes de qualquer coisa transacional.
+2. **Mês 2 — conteúdo de Faixa A/B (maior conversão):** "Processo arquivado ainda aparece no Jusbrasil? Veja quando dá pra remover" · "Fui absolvido, mas o Google ainda mostra a denúncia — o que fazer". Ligar direto à qualificação gratuita.
+3. **Mês 3 — B2B e monitoramento:** "O que aparece quando um cliente pesquisa o CNPJ da sua empresa" · "Reputação online para escritórios de advocacia: o que monitorar". Abre o canal 1 (parceria com advogados) e prepara terreno para o produto de monitoramento (Fase 7 do `README.md`).
+
+**Regra de conteúdo, herdada dos riscos já mapeados:** todo artigo que toca em "remover notícia"/"remover reportagem" precisa, na própria introdução, deixar explícito que fato verdadeiro e lícito não é removível — o objetivo desse conteúdo é filtrar, não maximizar cliques.
 
 ---
 
